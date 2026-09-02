@@ -64,8 +64,8 @@ img, svg { display: block; max-width: 100%; }
 }
 
 .brand-logo {
-  width: 3.25rem;
-  height: 2.5rem;
+  width: 2.75rem;
+  height: 1.35rem;
   object-fit: contain;
 }
 
