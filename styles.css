@@ -132,6 +132,7 @@ main.full-bleed { max-width: none; padding: 0; }
 
 .page-hero {
   max-width: var(--max-w);
+  padding: 3rem 1.5rem 2rem;
   margin: 0 0 1.5rem;
   max-width: 64ch;
 }
