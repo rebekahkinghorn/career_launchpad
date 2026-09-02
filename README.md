@@ -4,18 +4,28 @@ A static, no-build prototype for the BYU IS Junior Core Case Competition. Helps 
 IS students explore career paths and practice interview questions for them.
 
 ## Pages
-- `index.html` — Tracks & Careers: a "departures board" of six IS career paths (click a row to expand day-to-day duties, required skills, entry-level expectations, salary range, and what makes a strong candidate).
-- `compatibility.html` — Compatibility Test: an 8-question quiz that scores your answers against the six tracks and issues a "boarding pass" to your best-fit career, with a link straight into that track's interview prep.
-- `interview.html` — Interview Prep: pick a track ("gate") and work through behavioral and technical questions, with a reveal for a strong model answer and a coaching tip on each.
+- `index.html` — Home: intro plus a scroll-activated showcase that rotates through the
+  other three pages (compatibility test → career paths → interview prep), each with its
+  own background illustration and link.
+- `careers.html` — Career Paths: an expandable list of six IS career tracks (day-to-day
+  duties, required skills, entry-level expectations, salary range, and what makes a
+  strong candidate).
+- `compatibility.html` — Compatibility Test: an 8-question quiz that scores your answers
+  against the six tracks and returns your best-fit career, with a link straight into that
+  track's interview prep.
+- `interview.html` — Interview Prep: pick a track and work through behavioral and
+  technical questions, with a reveal for a strong model answer and a coaching tip on each.
 
 ## Shared files
-- `data.js` — all career, quiz, and interview-question content in one place. Edit this file to add/adjust careers or questions; both `index.html` and `interview.html` and `compatibility.html` read from it.
-- `styles.css` — the shared visual system (departure-board theme).
+- `data.js` — all career, quiz, and interview-question content in one place. Edit this
+  file to add/adjust careers or questions; `careers.html`, `compatibility.html`, and
+  `interview.html` all read from it.
+- `styles.css` — the shared visual system (BYU navy/white, royal-blue accent).
 
 ## Running it
-No build step and no dependencies beyond a Google Fonts import. Open `index.html` directly
-in a browser, or serve the folder with GitHub Pages (Settings → Pages → deploy from the
-`main` branch, root folder).
+No build step and no dependencies beyond a Google Fonts import. Open `index.html`
+directly in a browser, or serve the folder with GitHub Pages (Settings → Pages → deploy
+from the `main` branch, root folder — `index.html` is the entry point).
 
 ## Team
 - Eva Rushforth — mock resume for the ideal candidate in the interview prep section

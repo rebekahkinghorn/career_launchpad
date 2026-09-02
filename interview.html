@@ -10,31 +10,36 @@
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
 
-<header class="site-header">
-  <div class="header-inner">
+<header class="site-header-top">
+  <div class="top-inner">
     <a class="brand" href="index.html">
-      <span class="brand-mark">ISL</span>
+      <span class="brand-mark">BYU</span>
+      <span class="brand-divider"></span>
       <span class="brand-name">IS Career Launchpad</span>
     </a>
-    <nav class="site-nav" aria-label="Primary">
-      <a href="index.html">Tracks &amp; Careers</a>
-      <a href="compatibility.html">Compatibility Test</a>
-      <a href="interview.html" aria-current="page">Interview Prep</a>
-    </nav>
+    <a class="top-cta" href="compatibility.html">Take the Compatibility Test</a>
   </div>
 </header>
+<nav class="site-header-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="index.html">Home</a>
+    <a href="careers.html">Career Paths</a>
+    <a href="compatibility.html">Compatibility Test</a>
+    <a href="interview.html" aria-current="page">Interview Prep</a>
+  </div>
+</nav>
 
 <main id="main">
-  <section class="hero">
-    <p class="hero-eyebrow mono">FINAL BOARDING CALL</p>
+  <div class="page-hero">
+    <p class="eyebrow">PRACTICE BEFORE IT COUNTS</p>
     <h1>Prep for the interview, not just the résumé.</h1>
-    <p class="lede">Pick a gate below. Type an answer, then reveal a strong version and a coaching tip. If this took thirty minutes the night before an interview, you should walk in more ready than when you sat down.</p>
-  </section>
+    <p class="lede">Pick a track below. Type an answer, then reveal a strong version and a coaching tip. If this took thirty minutes the night before an interview, you should walk in more ready than when you sat down.</p>
+  </div>
 
-  <section aria-labelledby="gate-title">
-    <h2 id="gate-title" class="section-title">Choose your gate</h2>
-    <p class="section-sub">Same six tracks as the departures board. Each has two behavioral and two-to-three technical questions pulled from how these roles are actually interviewed at the entry level.</p>
-    <div class="gate-picker" id="gate-picker" role="tablist" aria-label="Career track"></div>
+  <section aria-labelledby="track-title">
+    <h2 id="track-title" class="section-title">Choose your track</h2>
+    <p class="section-sub">Same six tracks as the Career Paths page. Each has two behavioral and two-to-three technical questions drawn from how these roles are actually interviewed at the entry level.</p>
+    <div class="track-picker" id="track-picker" role="tablist" aria-label="Career track"></div>
   </section>
 
   <section aria-labelledby="behavioral-title">
@@ -57,12 +62,26 @@
 </main>
 
 <footer class="site-footer">
-  <p><span class="mono">ISL // BYU INFORMATION SYSTEMS</span> — Junior Core Case Competition prototype</p>
+  <div class="footer-inner">
+    <div>
+      <h4>Contact</h4>
+      <p>BYU Information Systems</p>
+      <p>IS Career Launchpad — Junior Core Case Competition</p>
+    </div>
+    <div>
+      <h4>Quick Links</h4>
+      <a href="index.html">Home</a>
+      <a href="careers.html">Career Paths</a>
+      <a href="compatibility.html">Compatibility Test</a>
+      <a href="interview.html">Interview Prep</a>
+    </div>
+  </div>
+  <div class="footer-bottom">Student prototype built for the BYU IS Junior Core Case Competition — not an official BYU site.</div>
 </footer>
 
 <script src="data.js"></script>
 <script>
-  const picker = document.getElementById('gate-picker');
+  const picker = document.getElementById('track-picker');
   const trackLabel = document.getElementById('track-label');
   const behavioralList = document.getElementById('behavioral-list');
   const technicalList = document.getElementById('technical-list');
@@ -73,7 +92,7 @@
     const uid = `${prefix}-${idx}`;
     card.innerHTML = `
       <h4>${item.q}</h4>
-      <label class="mono" for="ta-${uid}" style="font-size:0.75rem;color:#565D70;display:block;margin-bottom:0.4rem;">YOUR ANSWER</label>
+      <label class="mono" for="ta-${uid}" style="font-size:0.75rem;color:#6B7280;display:block;margin-bottom:0.4rem;">YOUR ANSWER</label>
       <textarea id="ta-${uid}" placeholder="Try answering out loud first, then jot the key points here..."></textarea>
       <div class="q-actions">
         <button class="btn secondary reveal-btn" type="button" data-target="reveal-${uid}">Reveal a strong answer</button>
@@ -107,7 +126,7 @@
     const career = CAREERS.find(c => c.id === id);
     const bank = INTERVIEW_BANK[id];
 
-    trackLabel.textContent = `${career.gate} · ${career.code} · ${career.name}`;
+    trackLabel.textContent = `${career.code} · ${career.name}`;
 
     behavioralList.innerHTML = '';
     bank.behavioral.forEach((item, i) => behavioralList.appendChild(buildQuestionCard(item, i, `${id}-b`)));
@@ -123,11 +142,11 @@
   CAREERS.forEach(career => {
     const tab = document.createElement('button');
     tab.type = 'button';
-    tab.className = 'gate-tab';
+    tab.className = 'track-tab';
     tab.role = 'tab';
     tab.dataset.id = career.id;
     tab.setAttribute('aria-selected', 'false');
-    tab.innerHTML = `<span class="mono">${career.gate}</span>${career.name}`;
+    tab.innerHTML = `<span class="mono">${career.code}</span>${career.name}`;
     tab.addEventListener('click', () => loadTrack(career.id));
     picker.appendChild(tab);
   });
