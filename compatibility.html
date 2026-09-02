@@ -4,8 +4,93 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Compatibility Test — IS Career Launchpad</title>
-<meta name="description" content="Answer eight quick questions and get matched to an IS career track.">
+<meta name="description" content="Answer three quick multi-select questions to find your top 2 IS career matches.">
 <link rel="stylesheet" href="styles.css">
+<style>
+  /* Page-specific multi-select quiz styles */
+  .checkbox-group {
+    display: grid;
+    gap: 0.75rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .checkbox-option {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.85rem;
+    background: var(--white);
+    border: 1px solid var(--gray-line);
+    color: var(--body-text);
+    padding: 0.9rem 1.1rem;
+    border-radius: var(--radius);
+    font-size: 0.98rem;
+    cursor: pointer;
+    transition: border-color 0.15s ease, background-color 0.15s ease;
+  }
+
+  .checkbox-option:hover {
+    border-color: var(--royal);
+    background-color: #F8FAFC;
+  }
+
+  .checkbox-option input[type="checkbox"] {
+    margin-top: 0.25rem;
+    width: 1.1rem;
+    height: 1.1rem;
+    accent-color: var(--royal);
+    cursor: pointer;
+  }
+
+  .checkbox-option input[type="checkbox"]:disabled + span {
+    opacity: 0.5;
+  }
+
+  .match-grid {
+    display: grid;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .match-card-styled {
+    background: var(--white);
+    border: 1px solid var(--gray-line);
+    border-radius: 8px;
+    padding: 1.75rem;
+    border-left: 5px solid var(--royal);
+  }
+
+  .match-rank {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--royal-deep);
+    letter-spacing: 0.03em;
+    margin-bottom: 0.25rem;
+  }
+
+  .match-card-styled h3 {
+    font-size: 1.4rem;
+    color: var(--navy);
+    margin: 0 0 0.5rem;
+  }
+
+  .match-roles-list {
+    margin: 0.75rem 0 1rem;
+    font-size: 0.95rem;
+    color: var(--body-text);
+  }
+
+  .course-badge {
+    display: inline-block;
+    background: var(--gray-bg);
+    border: 1px solid var(--gray-line);
+    color: var(--navy);
+    padding: 0.35rem 0.75rem;
+    border-radius: var(--radius);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.82rem;
+    font-weight: 600;
+  }
+</style>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -20,6 +105,7 @@
     <a class="top-cta" href="compatibility.html">Take the Compatibility Test</a>
   </div>
 </header>
+
 <nav class="site-header-nav" aria-label="Primary">
   <div class="nav-inner">
     <a href="index.html">Home</a>
@@ -31,46 +117,34 @@
 
 <main id="main">
   <div class="page-hero">
-    <p class="eyebrow">TWO MINUTES, EIGHT QUESTIONS</p>
-    <h1>Which career track actually fits you?</h1>
-    <p class="lede">Answer honestly, based on how you actually like to work — not what sounds impressive on a résumé.</p>
+    <p class="eyebrow">MULTI-SELECT CAREER MATCH</p>
+    <h1>Which IS career track actually fits you?</h1>
+    <p class="lede">Select up to 3 choices per question based on how you prefer to work — not what sounds best on a résumé.</p>
   </div>
 
   <section aria-label="Compatibility quiz" id="quiz-section">
-    <div class="quiz-shell" id="quiz-shell">
-      <p class="quiz-progress mono" id="quiz-progress">QUESTION 1 OF 8</p>
+    <div class="quiz-shell">
+      <p class="quiz-progress mono" id="quiz-progress">QUESTION 1 OF 3</p>
       <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
       <h2 class="quiz-q" id="quiz-q"></h2>
-      <div class="quiz-options" id="quiz-options"></div>
+      <p class="section-sub" style="margin-bottom: 1rem;">Select up to 3 choices:</p>
+      
+      <div class="checkbox-group" id="quiz-options"></div>
+
       <div class="quiz-nav">
         <button class="btn secondary" id="btn-back" type="button">Back</button>
-        <span class="mono" id="quiz-hint" style="color:#6B7280;font-size:0.8rem;">Choose an option to continue</span>
+        <button class="btn royal" id="btn-next" type="button">Next Question</button>
       </div>
     </div>
   </section>
 
   <section id="result-section" hidden aria-label="Your result">
-    <h2 class="section-title">Your result</h2>
-    <p class="section-sub" id="result-sub"></p>
+    <h2 class="section-title">Your Top 2 Compatibility Matches</h2>
+    <p class="section-sub">Based on your choices, these career tracks represent your strongest alignment today.</p>
 
-    <div class="result-card">
-      <div class="result-main">
-        <p class="result-label" id="result-industry">INDUSTRY</p>
-        <h3 id="result-name"></h3>
-        <p id="result-blurb" style="max-width:52ch;color:#33383F;"></p>
-        <div class="detail-actions" style="margin-top:1rem;">
-          <a class="btn royal" id="result-track-link" href="#">View full track</a>
-          <a class="btn secondary" id="result-interview-link" href="#">Prep for this interview</a>
-        </div>
-        <div class="result-runner" id="result-runner"></div>
-      </div>
-      <div class="result-side">
-        <p class="mono" id="result-code" style="font-size:1.1rem;margin:0;color:#fff;">—</p>
-        <p class="mono" style="margin:0;font-size:0.78rem;color:#A9C0E8;">TRACK ID</p>
-      </div>
-    </div>
+    <div class="match-grid" id="matches-container"></div>
 
-    <div class="detail-actions" style="margin-top:1.25rem;">
+    <div class="detail-actions" style="margin-top: 2rem;">
       <button class="btn secondary" id="btn-retake" type="button">Retake the test</button>
     </div>
   </section>
@@ -94,10 +168,102 @@
   <div class="footer-bottom">Student prototype built for the BYU IS Junior Core Case Competition — not an official BYU site.</div>
 </footer>
 
-<script src="data.js"></script>
 <script>
+  // Career Details Map containing sub-roles and BYU IS courses
+  const CAREER_DETAILS = {
+    dev: {
+      id: "dev",
+      title: "Software / Application Developer",
+      roles: "Software Engineer/Developer, Front-End / Web Developer, Application Developer, QA / Test Engineer, Programmer/Analyst, Security Software Developer",
+      courses: "IS 403, IS 413, IS 520, IS 537, IS 542"
+    },
+    ba: {
+      id: "ba",
+      title: "Business / Systems Analyst",
+      roles: "Business/Systems Analyst, IT/Financial Analyst, Business Transformation Analyst",
+      courses: "IS 401, IS 515, IS 520"
+    },
+    data: {
+      id: "data",
+      title: "Data Analyst or Data Scientist",
+      roles: "Data Analyst, Data Engineer, Data Scientist, BI Analyst/Developer",
+      courses: "IS 402, IS 415/455, IS 515, IS 555"
+    },
+    sec: {
+      id: "sec",
+      title: "Cybersecurity Analyst",
+      roles: "Security Analyst/Engineer, Cybersecurity Consultant, IT Risk/Compliance Analyst, IT Auditor",
+      courses: "IS 404, IS 414, IS 560, IS 565"
+    },
+    pm: {
+      id: "pm",
+      title: "IT Project Manager / Product Manager",
+      roles: "Project/Program Manager, Product Manager, Development Manager, Technical Service Manager",
+      courses: "IS 401, IS 551, IS 562"
+    },
+    ux: {
+      id: "ux",
+      title: "UX Designer / Product Manager",
+      roles: "Product Manager, UX/Web Designer",
+      courses: "IS 401, IS 542, IS 551"
+    },
+    erp: {
+      id: "erp",
+      title: "ERP / Systems Consultant",
+      roles: "Salesforce/CRM Consultant, Implementation/Integrations Consultant, Technology Consultant",
+      courses: "IS 401, IS 402, IS 520, IS 531"
+    },
+    cloud: {
+      id: "cloud",
+      title: "Cloud / Infrastructure Engineer",
+      roles: "Cloud Engineer/Consultant, Solutions/Systems Architect, Systems Administrator, Automation Engineer",
+      courses: "IS 404, IS 531, IS 533"
+    }
+  };
+
+  const QUESTIONS = [
+    {
+      q: "1. What gets you most excited about a project?",
+      options: [
+        { label: "Writing clean code, building custom web/mobile features, or automating software tests.", value: "dev" },
+        { label: "Bridging the gap between business stakeholders and technical teams to design solutions.", value: "ba" },
+        { label: "Uncovering insights from complex data, building pipelines, or creating predictive models.", value: "data" },
+        { label: "Finding vulnerabilities, evaluating tech risks, and keeping organizational data secure.", value: "sec" },
+        { label: "Leading project strategy, keeping engineering teams organized, and launching tech products.", value: "pm" },
+        { label: "Conducting user research and wireframing intuitive, aesthetic digital user interfaces.", value: "ux" },
+        { label: "Customizing enterprise platforms (like SAP or Salesforce) to power core business workflows.", value: "erp" },
+        { label: "Architecting serverless infrastructure, managing cloud environments, and deploying pipelines.", value: "cloud" }
+      ]
+    },
+    {
+      q: "2. When faced with a tough problem, what is your default approach?",
+      options: [
+        { label: "Dive into the logic step-by-step to debug code or diagnose system configuration issues.", value: "dev,cloud" },
+        { label: "Talk to end users and business leaders to translate complex operations into structured technical needs.", value: "ba,erp" },
+        { label: "Write queries, analyze data distributions, or run statistical tests to see what the numbers show.", value: "data" },
+        { label: "Think like an attacker to identify security risks, compliance gaps, or system weaknesses.", value: "sec" },
+        { label: "Re-evaluate project roadmaps, align team priorities, and clear operational roadblocks.", value: "pm" },
+        { label: "Map out the user's journey to pinpoint where friction or confusion occurs in the product.", value: "ux" }
+      ]
+    },
+    {
+      q: "3. Which deliverable sounds most rewarding to create?",
+      options: [
+        { label: "A full-stack web application, mobile app, or automated test script.", value: "dev" },
+        { label: "Comprehensive Business Requirements Documents (BRD) or process flow diagrams.", value: "ba" },
+        { label: "An interactive BI dashboard, data pipeline, or machine learning model.", value: "data" },
+        { label: "An IT audit report, threat assessment, or SOC/vulnerability compliance matrix.", value: "sec" },
+        { label: "Project charters, sprint backlogs, product roadmaps, or team delivery schedules.", value: "pm" },
+        { label: "High-fidelity Figma prototypes and user testing reports.", value: "ux" },
+        { label: "An end-to-end Salesforce CRM or SAP ERP system integration for a client.", value: "erp" },
+        { label: "Infrastructure-as-Code (IaC) scripts or an automated CI/CD deployment pipeline.", value: "cloud" }
+      ]
+    }
+  ];
+
   let current = 0;
-  const answers = new Array(QUIZ_QUESTIONS.length).fill(null);
+  // Matrix to hold selected option indexes per question
+  const selections = [[], [], []];
 
   const quizSection = document.getElementById('quiz-section');
   const resultSection = document.getElementById('result-section');
@@ -106,35 +272,58 @@
   const progressEl = document.getElementById('quiz-progress');
   const fillEl = document.getElementById('progress-fill');
   const backBtn = document.getElementById('btn-back');
-  const hintEl = document.getElementById('quiz-hint');
+  const nextBtn = document.getElementById('btn-next');
 
   function render() {
-    const item = QUIZ_QUESTIONS[current];
+    const item = QUESTIONS[current];
     qEl.textContent = item.q;
-    progressEl.textContent = `QUESTION ${current + 1} OF ${QUIZ_QUESTIONS.length}`;
-    fillEl.style.width = `${((current) / QUIZ_QUESTIONS.length) * 100}%`;
+    progressEl.textContent = `QUESTION ${current + 1} OF ${QUESTIONS.length}`;
+    fillEl.style.width = `${((current) / QUESTIONS.length) * 100}%`;
     backBtn.disabled = current === 0;
+    nextBtn.textContent = current === QUESTIONS.length - 1 ? 'Show Results' : 'Next Question';
 
     optsEl.innerHTML = '';
     item.options.forEach((opt, i) => {
-      const b = document.createElement('button');
-      b.type = 'button';
-      b.className = 'quiz-option';
-      if (answers[current] === i) b.classList.add('selected');
-      b.textContent = opt.label;
-      b.addEventListener('click', () => {
-        answers[current] = i;
-        if (current < QUIZ_QUESTIONS.length - 1) {
-          current += 1;
-          render();
+      const label = document.createElement('label');
+      label.className = 'checkbox-option';
+
+      const cb = document.createElement('input');
+      cb.type = 'checkbox';
+      cb.value = opt.value;
+      if (selections[current].includes(i)) cb.checked = true;
+
+      cb.addEventListener('change', () => {
+        if (cb.checked) {
+          if (selections[current].length < 3) {
+            selections[current].push(i);
+          } else {
+            cb.checked = false; // Cap at 3
+          }
         } else {
-          showResult();
+          selections[current] = selections[current].filter(idx => idx !== i);
         }
+        updateCheckboxStates();
       });
-      optsEl.appendChild(b);
+
+      const span = document.createElement('span');
+      span.textContent = opt.label;
+
+      label.appendChild(cb);
+      label.appendChild(span);
+      optsEl.appendChild(label);
     });
 
-    hintEl.textContent = 'Choose an option to continue';
+    updateCheckboxStates();
+  }
+
+  function updateCheckboxStates() {
+    const checkboxes = optsEl.querySelectorAll('input[type="checkbox"]');
+    const isMax = selections[current].length >= 3;
+    checkboxes.forEach(cb => {
+      if (!cb.checked) {
+        cb.disabled = isMax;
+      }
+    });
   }
 
   backBtn.addEventListener('click', () => {
@@ -144,37 +333,59 @@
     }
   });
 
-  function showResult() {
-    const scores = {};
-    CAREERS.forEach(c => scores[c.id] = 0);
+  nextBtn.addEventListener('click', () => {
+    if (selections[current].length === 0) {
+      alert("Please select at least 1 option before moving forward.");
+      return;
+    }
 
-    answers.forEach((choiceIndex, qi) => {
-      if (choiceIndex === null) return;
-      QUIZ_QUESTIONS[qi].options[choiceIndex].ids.forEach(id => {
-        scores[id] = (scores[id] || 0) + 1;
+    if (current < QUESTIONS.length - 1) {
+      current += 1;
+      render();
+    } else {
+      showResult();
+    }
+  });
+
+  function showResult() {
+    const scores = { dev: 0, ba: 0, data: 0, sec: 0, pm: 0, ux: 0, erp: 0, cloud: 0 };
+
+    selections.forEach((qChoices, qIndex) => {
+      qChoices.forEach(choiceIdx => {
+        const values = QUESTIONS[qIndex].options[choiceIdx].value.split(',');
+        values.forEach(val => {
+          if (scores.hasOwnProperty(val)) {
+            scores[val] += 1;
+          }
+        });
       });
     });
 
-    const ranked = Object.entries(scores).sort((a, b) => b[1] - a[1]);
-    const topId = ranked[0][0];
-    const runnerId = ranked[1] ? ranked[1][0] : null;
-    const top = CAREERS.find(c => c.id === topId);
-    const runner = runnerId ? CAREERS.find(c => c.id === runnerId) : null;
+    const ranked = Object.keys(scores)
+      .map(key => ({ key: key, score: scores[key], ...CAREER_DETAILS[key] }))
+      .sort((a, b) => b.score - a.score);
 
-    document.getElementById('result-industry').textContent = top.industry.toUpperCase();
-    document.getElementById('result-name').textContent = top.name;
-    document.getElementById('result-blurb').textContent = top.blurb;
-    document.getElementById('result-code').textContent = top.code;
-    document.getElementById('result-track-link').href = `careers.html#track=${top.id}`;
-    document.getElementById('result-interview-link').href = `interview.html?career=${top.id}`;
-    document.getElementById('result-sub').textContent = `Based on your answers, this is the track you're most aligned with today — not a life sentence.`;
+    const topTwo = ranked.slice(0, 2);
+    const container = document.getElementById('matches-container');
+    container.innerHTML = '';
 
-    const runnerEl = document.getElementById('result-runner');
-    if (runner) {
-      runnerEl.innerHTML = `Close second: <strong>${runner.name}</strong> — worth a look too.`;
-    } else {
-      runnerEl.textContent = '';
-    }
+    topTwo.forEach((match, index) => {
+      const card = document.createElement('div');
+      card.className = 'match-card-styled';
+      card.innerHTML = `
+        <div class="match-rank">MATCH #${index + 1}</div>
+        <h3>${match.title}</h3>
+        <p class="match-roles-list"><strong>Roles included:</strong> ${match.roles}</p>
+        <div>
+          <span class="course-badge">Relevant BYU IS Electives: ${match.courses}</span>
+        </div>
+        <div class="detail-actions" style="margin-top: 1.25rem;">
+          <a class="btn royal" href="careers.html#track=${match.id}">View full track</a>
+          <a class="btn secondary" href="interview.html?career=${match.id}">Prep for interview</a>
+        </div>
+      `;
+      container.appendChild(card);
+    });
 
     quizSection.hidden = true;
     resultSection.hidden = false;
@@ -183,7 +394,9 @@
 
   document.getElementById('btn-retake').addEventListener('click', () => {
     current = 0;
-    answers.fill(null);
+    selections[0] = [];
+    selections[1] = [];
+    selections[2] = [];
     resultSection.hidden = true;
     quizSection.hidden = false;
     render();
