@@ -39,7 +39,7 @@
   <section aria-labelledby="track-title">
     <h2 id="track-title" class="section-title">Choose your track</h2>
     <p class="section-sub">Same six tracks as the Career Paths page. Each has two behavioral and two-to-three technical questions drawn from how these roles are actually interviewed at the entry level.</p>
-    <div class="track-picker" id="track-picker" role="tablist" aria-label="Career track"></div>
+    <div class="track-picker" id="track-picker" role="tablist" ></div>
   </section>
 
   <section aria-labelledby="behavioral-title">
@@ -146,7 +146,7 @@
     tab.role = 'tab';
     tab.dataset.id = career.id;
     tab.setAttribute('aria-selected', 'false');
-    tab.innerHTML = `<span class="mono">${career.code}</span>${career.name}`;
+    tab.innerHTML = career.name;
     tab.addEventListener('click', () => loadTrack(career.id));
     picker.appendChild(tab);
   });
