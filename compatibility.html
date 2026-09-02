@@ -97,7 +97,7 @@
 
 <header class="site-header-top">
   <div class="top-inner">
-    <a style = "color: white" class="brand" href="index.html">
+    <a style="color: white" class="brand" href="index.html">
       <img class="brand-logo" src="https://brightspotcdn.byu.edu/e4/0a/b679ee0a41d9b1675fc78cd03239/byu-logo-white-small.svg" alt="BYU">
       <span class="brand-divider"></span>
       <span class="brand-name">IS Career Launchpad</span>
@@ -117,9 +117,9 @@
 
 <main id="main">
   <div class="page-hero">
-    <p class="eyebrow">MULTI-SELECT CAREER MATCH</p>
+    <p class="eyebrow">TWO MINUTES, THREE QUESTIONS</p>
     <h1>Which IS career track actually fits you?</h1>
-    <p class="lede">Select up to 3 choices per question based on how you prefer to work — not what sounds best on a résumé.</p>
+    <p class="lede">No complex jargon here! Pick up to 3 choices per question based on how you naturally like to think and work.</p>
   </div>
 
   <section aria-label="Compatibility quiz" id="quiz-section">
@@ -140,7 +140,7 @@
 
   <section id="result-section" hidden aria-label="Your result">
     <h2 class="section-title">Your Top 2 Compatibility Matches</h2>
-    <p class="section-sub">Based on your choices, these career tracks represent your strongest alignment today.</p>
+    <p class="section-sub">Based on how you like to work, these two career tracks represent your best fit today.</p>
 
     <div class="match-grid" id="matches-container"></div>
 
@@ -221,42 +221,43 @@
     }
   };
 
+  // Plain-language, beginner-friendly Questions & Options
   const QUESTIONS = [
     {
-      q: "1. What gets you most excited about a project?",
+      q: "1. What kind of daily work sounds most enjoyable to you?",
       options: [
-        { label: "Writing clean code, building custom web/mobile features, or automating software tests.", value: "dev" },
-        { label: "Bridging the gap between business stakeholders and technical teams to design solutions.", value: "ba" },
-        { label: "Uncovering insights from complex data, building pipelines, or creating predictive models.", value: "data" },
-        { label: "Finding vulnerabilities, evaluating tech risks, and keeping organizational data secure.", value: "sec" },
-        { label: "Leading project strategy, keeping engineering teams organized, and launching tech products.", value: "pm" },
-        { label: "Conducting user research and wireframing intuitive, aesthetic digital user interfaces.", value: "ux" },
-        { label: "Customizing enterprise platforms (like SAP or Salesforce) to power core business workflows.", value: "erp" },
-        { label: "Architecting serverless infrastructure, managing cloud environments, and deploying pipelines.", value: "cloud" }
+        { label: "Building websites, apps, or writing code to make software features work.", value: "dev" },
+        { label: "Talking with business teams to figure out what software tools they need built.", value: "ba" },
+        { label: "Exploring spreadsheets and charts to spot hidden trends or answer big questions.", value: "data" },
+        { label: "Protecting systems from hackers and making sure company data is kept secure.", value: "sec" },
+        { label: "Organizing team schedules, leading meetings, and making sure projects finish on time.", value: "pm" },
+        { label: "Designing clean layouts, buttons, and app screens that are easy for people to use.", value: "ux" },
+        { label: "Setting up large software tools (like Salesforce or SAP) for companies to run smoothly.", value: "erp" },
+        { label: "Managing online servers, networking, and keeping systems running 24/7.", value: "cloud" }
       ]
     },
     {
-      q: "2. When faced with a tough problem, what is your default approach?",
+      q: "2. How do you naturally approach solving a problem?",
       options: [
-        { label: "Dive into the logic step-by-step to debug code or diagnose system configuration issues.", value: "dev,cloud" },
-        { label: "Talk to end users and business leaders to translate complex operations into structured technical needs.", value: "ba,erp" },
-        { label: "Write queries, analyze data distributions, or run statistical tests to see what the numbers show.", value: "data" },
-        { label: "Think like an attacker to identify security risks, compliance gaps, or system weaknesses.", value: "sec" },
-        { label: "Re-evaluate project roadmaps, align team priorities, and clear operational roadblocks.", value: "pm" },
-        { label: "Map out the user's journey to pinpoint where friction or confusion occurs in the product.", value: "ux" }
+        { label: "I step through logic line-by-line to find where the error or bug is.", value: "dev,cloud" },
+        { label: "I ask people questions so I can clearly understand what they need help with.", value: "ba,erp" },
+        { label: "I look at raw numbers or statistics to see what facts prove the answer.", value: "data" },
+        { label: "I look for safety risks, loopholes, or weaknesses that others might have missed.", value: "sec" },
+        { label: "I organize tasks, prioritize what to do first, and assign steps to the right people.", value: "pm" },
+        { label: "I put myself in the user's shoes to see where they get confused or frustrated.", value: "ux" }
       ]
     },
     {
-      q: "3. Which deliverable sounds most rewarding to create?",
+      q: "3. What would you feel most proud to show off at the end of a project?",
       options: [
-        { label: "A full-stack web application, mobile app, or automated test script.", value: "dev" },
-        { label: "Comprehensive Business Requirements Documents (BRD) or process flow diagrams.", value: "ba" },
-        { label: "An interactive BI dashboard, data pipeline, or machine learning model.", value: "data" },
-        { label: "An IT audit report, threat assessment, or SOC/vulnerability compliance matrix.", value: "sec" },
-        { label: "Project charters, sprint backlogs, product roadmaps, or team delivery schedules.", value: "pm" },
-        { label: "High-fidelity Figma prototypes and user testing reports.", value: "ux" },
-        { label: "An end-to-end Salesforce CRM or SAP ERP system integration for a client.", value: "erp" },
-        { label: "Infrastructure-as-Code (IaC) scripts or an automated CI/CD deployment pipeline.", value: "cloud" }
+        { label: "A fully working phone app or web tool that I coded myself.", value: "dev" },
+        { label: "A clear step-by-step plan that explains how a new technology solution will work.", value: "ba" },
+        { label: "A visually impressive interactive chart or data dashboard.", value: "data" },
+        { label: "A safety checklist showing a system is locked down and secure.", value: "sec" },
+        { label: "A major project completed on budget and delivered ahead of schedule.", value: "pm" },
+        { label: "A clickable prototype showing what an app will visually look and feel like.", value: "ux" },
+        { label: "A fully customized company database or customer system ready for employees to use.", value: "erp" },
+        { label: "A fast, reliable web server setup that can handle millions of online visitors.", value: "cloud" }
       ]
     }
   ];
