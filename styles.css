@@ -1,3 +1,13 @@
+/* 2. Update styles.css
+Replace the .showcase section in styles.css with native scroll snapping CSS:
+
+CSS
+
+apparently 
+*/
+
+
+
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;900&family=IBM+Plex+Mono:wght@500;600&display=swap');
 
 :root {
@@ -132,8 +142,10 @@ main.full-bleed { max-width: none; padding: 0; }
 
 .page-hero {
   max-width: var(--max-w);
-  margin: 0 auto;
-  padding: 3rem 1.5rem 2rem;
+  padding-top: 3rem;
+  padding-bottom: 2rem;
+  margin: 0 0 1.5rem;
+  max-width: 64ch;
 }
 
 .page-hero .eyebrow {
