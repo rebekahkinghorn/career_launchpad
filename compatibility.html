@@ -155,8 +155,7 @@
   <div class="footer-inner">
     <div>
       <h4>Contact</h4>
-      <p>BYU Information Systems</p>
-      <p>IS Career Launchpad — Junior Core Case Competition</p>
+      <a href="https://iscareers.byu.edu/" target="_blank" rel="noopener noreferrer">BYU Information Systems</a>
     </div>
     <div>
       <h4>Quick Links</h4>
@@ -175,50 +174,58 @@
   const CAREER_DETAILS = {
     dev: {
       id: "dev",
+      targetId: "app-dev",
       title: "Software / Application Developer",
       roles: "Software Engineer/Developer, Front-End / Web Developer, Application Developer, QA / Test Engineer, Programmer/Analyst, Security Software Developer",
       courses: "IS 403, IS 413, IS 520, IS 537, IS 542"
     },
     ba: {
       id: "ba",
+      targetId: "bus-systems-analyst",
       title: "Business / Systems Analyst",
       roles: "Business/Systems Analyst, IT/Financial Analyst, Business Transformation Analyst",
       courses: "IS 401, IS 515, IS 520"
     },
     data: {
       id: "data",
+      targetId: "data-analyst-sci",
       title: "Data Analyst or Data Scientist",
       roles: "Data Analyst, Data Engineer, Data Scientist, BI Analyst/Developer",
       courses: "IS 402, IS 415/455, IS 515, IS 555"
     },
     sec: {
       id: "sec",
+      targetId: "cyber-analyst",
       title: "Cybersecurity Analyst",
       roles: "Security Analyst/Engineer, Cybersecurity Consultant, IT Risk/Compliance Analyst, IT Auditor",
       courses: "IS 404, IS 414, IS 560, IS 565"
     },
     pm: {
       id: "pm",
+      targetId: "it-pm",
       title: "IT Project Manager / Product Manager",
       roles: "Project/Program Manager, Product Manager, Development Manager, Technical Service Manager",
       courses: "IS 401, IS 551, IS 562"
     },
     ux: {
       id: "ux",
+      targetId: "ux-pm",
       title: "UX Designer / Product Manager",
       roles: "Product Manager, UX/Web Designer",
       courses: "IS 401, IS 542, IS 551"
     },
     erp: {
       id: "erp",
+      targetId: "erp-consultant",
       title: "ERP / Systems Consultant",
       roles: "Salesforce/CRM Consultant, Implementation/Integrations Consultant, Technology Consultant",
       courses: "IS 401, IS 402, IS 520, IS 531"
     },
     cloud: {
       id: "cloud",
-      title: "Cloud / Infrastructure Engineer",
-      roles: "Cloud Engineer/Consultant, Solutions/Systems Architect, Systems Administrator, Automation Engineer",
+      targetId: "sec-dev",
+      title: "Cloud / Systems Engineer",
+      roles: "Security Software Developer, Systems Administrator, Cloud Infrastructure",
       courses: "IS 404, IS 531, IS 533"
     }
   };
@@ -373,6 +380,7 @@
     container.innerHTML = '';
 
     topTwo.forEach((match, index) => {
+      const targetCareerId = match.targetId || match.id;
       const card = document.createElement('div');
       card.className = 'match-card-styled';
       card.innerHTML = `
@@ -383,8 +391,8 @@
           <span class="course-badge">Relevant BYU IS Electives: ${match.courses}</span>
         </div>
         <div class="detail-actions" style="margin-top: 1.25rem;">
-          <a class="btn royal" href="careers.html#track=${match.id}">View full track</a>
-          <a class="btn secondary" href="interview.html?career=${match.id}">Prep for interview</a>
+          <a class="btn secondary" href="careers.html?career=${targetCareerId}">View full track</a>
+          <a class="btn royal" href="interview.html?career=${targetCareerId}">Prep for interview</a>
         </div>
       `;
       container.appendChild(card);
