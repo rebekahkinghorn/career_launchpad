@@ -148,7 +148,7 @@
     tab.role = 'tab';
     tab.dataset.id = career.id;
     tab.setAttribute('aria-selected', 'false');
-    tab.innerHTML = `<span class="mono">${career.code}</span>${career.name}`;
+    tab.innerHTML = career.name;
     tab.addEventListener('click', () => loadTrack(career.id));
     picker.appendChild(tab);
   });
