@@ -57,7 +57,7 @@ tip: "Show that you balance release velocity with risk mitigation."
 },
 {
 q: "Describe a situation where a critical bug made it to production. How did you react?",
-strong: "Describe taking ownership immediately without shifting blame, helping isolate the reproduce steps for dev teams, and participating in a blameless post-mortem to update test automation suites.",
+strong: "Emphasize ownership over blame — focus on the response, not who caused it. Explain immediately triaging severity and impact, communicating clearly with the team to contain/hotfix the issue, then leading a root cause analysis (e.g., gap in test coverage, missed edge case, environment mismatch) once things stabilize. Highlight updating test cases/regression suites so the same bug can't slip through again. Treat production bugs as a process failure to learn from, not just an individual mistake.",
 tip: "Focus on preventative process improvements after an incident."
 }
 ],
