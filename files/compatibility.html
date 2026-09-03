@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Compatibility Test — IS Career Launchpad</title>
+<meta name="description" content="Answer eight quick questions and get matched to an IS career track.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header-top">
+  <div class="top-inner">
+    <a class="brand" href="index.html">
+      <span class="brand-mark">BYU</span>
+      <span class="brand-divider"></span>
+      <span class="brand-name">IS Career Launchpad</span>
+    </a>
+    <a class="top-cta" href="compatibility.html">Take the Compatibility Test</a>
+  </div>
+</header>
+<nav class="site-header-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="index.html">Home</a>
+    <a href="careers.html">Career Paths</a>
+    <a href="compatibility.html" aria-current="page">Compatibility Test</a>
+    <a href="interview.html">Interview Prep</a>
+  </div>
+</nav>
+
+<main id="main">
+  <div class="page-hero">
+    <p class="eyebrow">TWO MINUTES, EIGHT QUESTIONS</p>
+    <h1>Which career track actually fits you?</h1>
+    <p class="lede">Answer honestly, based on how you actually like to work — not what sounds impressive on a résumé.</p>
+  </div>
+
+  <section aria-label="Compatibility quiz" id="quiz-section">
+    <div class="quiz-shell" id="quiz-shell">
+      <p class="quiz-progress mono" id="quiz-progress">QUESTION 1 OF 8</p>
+      <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+      <h2 class="quiz-q" id="quiz-q"></h2>
+      <div class="quiz-options" id="quiz-options"></div>
+      <div class="quiz-nav">
+        <button class="btn secondary" id="btn-back" type="button">Back</button>
+        <span class="mono" id="quiz-hint" style="color:#6B7280;font-size:0.8rem;">Choose an option to continue</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="result-section" hidden aria-label="Your result">
+    <h2 class="section-title">Your result</h2>
+    <p class="section-sub" id="result-sub"></p>
+
+    <div class="result-card">
+      <div class="result-main">
+        <p class="result-label" id="result-industry">INDUSTRY</p>
+        <h3 id="result-name"></h3>
+        <p id="result-blurb" style="max-width:52ch;color:#33383F;"></p>
+        <div class="detail-actions" style="margin-top:1rem;">
+          <a class="btn royal" id="result-track-link" href="#">View full track</a>
+          <a class="btn secondary" id="result-interview-link" href="#">Prep for this interview</a>
+        </div>
+        <div class="result-runner" id="result-runner"></div>
+      </div>
+      <div class="result-side">
+        <p class="mono" id="result-code" style="font-size:1.1rem;margin:0;color:#fff;">—</p>
+        <p class="mono" style="margin:0;font-size:0.78rem;color:#A9C0E8;">TRACK ID</p>
+      </div>
+    </div>
+
+    <div class="detail-actions" style="margin-top:1.25rem;">
+      <button class="btn secondary" id="btn-retake" type="button">Retake the test</button>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <h4>Contact</h4>
+      <p>BYU Information Systems</p>
+      <p>IS Career Launchpad — Junior Core Case Competition</p>
+    </div>
+    <div>
+      <h4>Quick Links</h4>
+      <a href="index.html">Home</a>
+      <a href="careers.html">Career Paths</a>
+      <a href="compatibility.html">Compatibility Test</a>
+      <a href="interview.html">Interview Prep</a>
+    </div>
+  </div>
+  <div class="footer-bottom">Student prototype built for the BYU IS Junior Core Case Competition — not an official BYU site.</div>
+</footer>
+
+<script src="data.js"></script>
+<script>
+  let current = 0;
+  const answers = new Array(QUIZ_QUESTIONS.length).fill(null);
+
+  const quizSection = document.getElementById('quiz-section');
+  const resultSection = document.getElementById('result-section');
+  const qEl = document.getElementById('quiz-q');
+  const optsEl = document.getElementById('quiz-options');
+  const progressEl = document.getElementById('quiz-progress');
+  const fillEl = document.getElementById('progress-fill');
+  const backBtn = document.getElementById('btn-back');
+  const hintEl = document.getElementById('quiz-hint');
+
+  function render() {
+    const item = QUIZ_QUESTIONS[current];
+    qEl.textContent = item.q;
+    progressEl.textContent = `QUESTION ${current + 1} OF ${QUIZ_QUESTIONS.length}`;
+    fillEl.style.width = `${((current) / QUIZ_QUESTIONS.length) * 100}%`;
+    backBtn.disabled = current === 0;
+
+    optsEl.innerHTML = '';
+    item.options.forEach((opt, i) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'quiz-option';
+      if (answers[current] === i) b.classList.add('selected');
+      b.textContent = opt.label;
+      b.addEventListener('click', () => {
+        answers[current] = i;
+        if (current < QUIZ_QUESTIONS.length - 1) {
+          current += 1;
+          render();
+        } else {
+          showResult();
+        }
+      });
+      optsEl.appendChild(b);
+    });
+
+    hintEl.textContent = 'Choose an option to continue';
+  }
+
+  backBtn.addEventListener('click', () => {
+    if (current > 0) {
+      current -= 1;
+      render();
+    }
+  });
+
+  function showResult() {
+    const scores = {};
+    CAREERS.forEach(c => scores[c.id] = 0);
+
+    answers.forEach((choiceIndex, qi) => {
+      if (choiceIndex === null) return;
+      QUIZ_QUESTIONS[qi].options[choiceIndex].ids.forEach(id => {
+        scores[id] = (scores[id] || 0) + 1;
+      });
+    });
+
+    const ranked = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+    const topId = ranked[0][0];
+    const runnerId = ranked[1] ? ranked[1][0] : null;
+    const top = CAREERS.find(c => c.id === topId);
+    const runner = runnerId ? CAREERS.find(c => c.id === runnerId) : null;
+
+    document.getElementById('result-industry').textContent = top.industry.toUpperCase();
+    document.getElementById('result-name').textContent = top.name;
+    document.getElementById('result-blurb').textContent = top.blurb;
+    document.getElementById('result-code').textContent = top.code;
+    document.getElementById('result-track-link').href = `careers.html#track=${top.id}`;
+    document.getElementById('result-interview-link').href = `interview.html?career=${top.id}`;
+    document.getElementById('result-sub').textContent = `Based on your answers, this is the track you're most aligned with today — not a life sentence.`;
+
+    const runnerEl = document.getElementById('result-runner');
+    if (runner) {
+      runnerEl.innerHTML = `Close second: <strong>${runner.name}</strong> — worth a look too.`;
+    } else {
+      runnerEl.textContent = '';
+    }
+
+    quizSection.hidden = true;
+    resultSection.hidden = false;
+    resultSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  document.getElementById('btn-retake').addEventListener('click', () => {
+    current = 0;
+    answers.fill(null);
+    resultSection.hidden = true;
+    quizSection.hidden = false;
+    render();
+  });
+
+  render();
+</script>
+</body>
+</html>

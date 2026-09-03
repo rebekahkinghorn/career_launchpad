@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Interview Prep — IS Career Launchpad</title>
-<meta name="description" content="Practice behavioral and technical interview questions for twelve IS career tracks, with model answers and coaching tips.">
+<meta name="description" content="Practice behavioral and technical interview questions for six IS career tracks, with model answers and coaching tips.">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -12,35 +12,33 @@
 
 <header class="site-header-top">
   <div class="top-inner">
-    <a style="color: white" class="brand" href="index.html">
-      <img class="brand-logo" src="https://brightspotcdn.byu.edu/e4/0a/b679ee0a41d9b1675fc78cd03239/byu-logo-white-small.svg" alt="BYU">
+    <a class="brand" href="index.html">
+      <span class="brand-mark">BYU</span>
       <span class="brand-divider"></span>
       <span class="brand-name">IS Career Launchpad</span>
     </a>
     <a class="top-cta" href="compatibility.html">Take the Compatibility Test</a>
   </div>
 </header>
-
 <nav class="site-header-nav" aria-label="Primary">
   <div class="nav-inner">
     <a href="index.html">Home</a>
     <a href="careers.html">Career Paths</a>
     <a href="compatibility.html">Compatibility Test</a>
     <a href="interview.html" aria-current="page">Interview Prep</a>
-    <a href="contact.html">Contact</a>
   </div>
 </nav>
 
 <main id="main">
   <div class="page-hero">
     <p class="eyebrow">PRACTICE BEFORE IT COUNTS</p>
-    <h1>Prep for the interview, not just the resume.</h1>
-    <p class="lede">Pick a track below. Type an answer, then reveal a strong version and a coaching tip. Even just 30 minutes will help you be more prepared when you walk into your interview!</p>
+    <h1>Prep for the interview, not just the résumé.</h1>
+    <p class="lede">Pick a track below. Type an answer, then reveal a strong version and a coaching tip. If this took thirty minutes the night before an interview, you should walk in more ready than when you sat down.</p>
   </div>
 
   <section aria-labelledby="track-title">
     <h2 id="track-title" class="section-title">Choose your track</h2>
-    <p class="section-sub">Same twelve tracks as the Career Paths page. Each has behavioral and technical questions drawn from how these roles are actually interviewed at the entry level.</p>
+    <p class="section-sub">Same six tracks as the Career Paths page. Each has two behavioral and two-to-three technical questions drawn from how these roles are actually interviewed at the entry level.</p>
     <div class="track-picker" id="track-picker" role="tablist" aria-label="Career track"></div>
   </section>
 
@@ -67,7 +65,8 @@
   <div class="footer-inner">
     <div>
       <h4>Contact</h4>
-      <a href="https://iscareers.byu.edu/" target="_blank" rel="noopener noreferrer">BYU Information Systems</a>
+      <p>BYU Information Systems</p>
+      <p>IS Career Launchpad — Junior Core Case Competition</p>
     </div>
     <div>
       <h4>Quick Links</h4>
@@ -75,7 +74,6 @@
       <a href="careers.html">Career Paths</a>
       <a href="compatibility.html">Compatibility Test</a>
       <a href="interview.html">Interview Prep</a>
-      <a href="contact.html">Contact</a>
     </div>
   </div>
   <div class="footer-bottom">Student prototype built for the BYU IS Junior Core Case Competition — not an official BYU site.</div>
@@ -128,8 +126,6 @@
     const career = CAREERS.find(c => c.id === id);
     const bank = INTERVIEW_BANK[id];
 
-    if (!career || !bank) return;
-
     trackLabel.textContent = `${career.code} · ${career.name}`;
 
     behavioralList.innerHTML = '';
@@ -150,17 +146,15 @@
     tab.role = 'tab';
     tab.dataset.id = career.id;
     tab.setAttribute('aria-selected', 'false');
-    tab.innerHTML = career.name;
+    tab.innerHTML = `<span class="mono">${career.code}</span>${career.name}`;
     tab.addEventListener('click', () => loadTrack(career.id));
     picker.appendChild(tab);
   });
 
-  window.addEventListener('load', () => {
-    const params = new URLSearchParams(window.location.search);
-    const requested = params.get('career');
-    const startId = CAREERS.some(c => c.id === requested) ? requested : CAREERS[0].id;
-    loadTrack(startId);
-  });
+  const params = new URLSearchParams(location.search);
+  const requested = params.get('career');
+  const startId = CAREERS.some(c => c.id === requested) ? requested : CAREERS[0].id;
+  loadTrack(startId);
 </script>
 </body>
 </html>
