@@ -6,56 +6,6 @@
 <title>Career Paths — IS Career Launchpad</title>
 <meta name="description" content="Explore IS career paths — what each role does day to day, what skills it takes, and what it pays to start.">
 <link rel="stylesheet" href="styles.css">
-<style>
-  /* Dropdown Details Accordion Styling */
-  .subrole-accordion {
-    margin-top: 1rem;
-    border: 1px solid var(--gray-line, #E5E7EB);
-    border-radius: 6px;
-    background: #FAFAFA;
-    overflow: hidden;
-  }
-
-  .subrole-accordion summary {
-    padding: 0.75rem 1rem;
-    font-weight: 600;
-    color: var(--navy, #0F172A);
-    cursor: pointer;
-    list-style: none;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    user-select: none;
-  }
-
-  .subrole-accordion summary::-webkit-details-marker {
-    display: none;
-  }
-
-  .subrole-accordion summary::after {
-    content: '▸';
-    font-size: 0.85rem;
-    color: var(--royal, #002E5D);
-    transition: transform 0.2s ease;
-  }
-
-  .subrole-accordion[open] summary::after {
-    transform: rotate(90deg);
-  }
-
-  .subrole-accordion[open] summary {
-    border-bottom: 1px solid var(--gray-line, #E5E7EB);
-    background-color: #F1F5F9;
-  }
-
-  .subrole-content {
-    padding: 0.85rem 1rem;
-    font-size: 0.95rem;
-    line-height: 1.5;
-    color: #334155;
-    background: #FFFFFF;
-  }
-</style>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -63,29 +13,27 @@
 <header class="site-header-top">
   <div class="top-inner">
     <a class="brand" href="index.html">
-      <img style="color: white" class="brand-logo" src="https://brightspotcdn.byu.edu/e4/0a/b679ee0a41d9b1675fc78cd03239/byu-logo-white-small.svg" alt="BYU">
+      <span class="brand-mark">BYU</span>
       <span class="brand-divider"></span>
       <span class="brand-name">IS Career Launchpad</span>
     </a>
     <a class="top-cta" href="compatibility.html">Take the Compatibility Test</a>
   </div>
 </header>
-
 <nav class="site-header-nav" aria-label="Primary">
   <div class="nav-inner">
     <a href="index.html">Home</a>
     <a href="careers.html" aria-current="page">Career Paths</a>
     <a href="compatibility.html">Compatibility Test</a>
     <a href="interview.html">Interview Prep</a>
-    <a href="contact.html">Contact</a>
   </div>
 </nav>
 
 <main id="main">
   <div class="page-hero">
-    <p class="eyebrow">CAREER PATHS</p>
+    <p class="eyebrow">SIX TRACKS, ONE DEGREE</p>
     <h1>Where an IS degree actually leads.</h1>
-    <p class="lede">Explore career paths for Information Systems graduates. Click any role to view its day-to-day work, job summaries, and start prepping for interviews.</p>
+    <p class="lede">Six real career paths for Information Systems graduates. Open one to see the day-to-day work, the skills it actually requires, and what it takes to stand out as an entry-level candidate.</p>
   </div>
 
   <section aria-labelledby="list-title">
@@ -116,10 +64,8 @@
   <div class="footer-inner">
     <div>
       <h4>Contact</h4>
-      <a href="https://iscareers.byu.edu/" target="_blank" rel="noopener noreferrer">BYU Information Systems</a>
-      <br>
-      <h4>Sources</h4>
-      <a href="https://iscareers.byu.edu/placement-stats" target="_blank" rel="noopener noreferrer">All information used was from BYU's Information Systems Placement Data from the years 2017 to 2025</a>
+      <p>BYU Information Systems</p>
+      <p>IS Career Launchpad — Junior Core Case Competition</p>
     </div>
     <div>
       <h4>Quick Links</h4>
@@ -132,155 +78,11 @@
   <div class="footer-bottom">Student prototype built for the BYU IS Junior Core Case Competition — not an official BYU site.</div>
 </footer>
 
+<script src="data.js"></script>
 <script>
-  const CAREER_DATA = [
-    {
-      id: "app-dev",
-      code: "DEV-01",
-      name: "Application Developer",
-      industry: "Software Engineering",
-      salary: "Starting Range: $75,000 – $105,000",
-      blurb: "Designs, writes, tests, and maintains code that powers applications, websites, or internal tools. Works across the full development lifecycle — from gathering requirements to deploying and debugging.",
-      details: [
-        { title: "Software Engineer / Developer", text: "Designs, writes, tests, and maintains code that powers applications, websites, or internal tools. Works across the full development lifecycle and collaborates with product managers, designers, and engineers. Uses Java, Python, C++, or JavaScript." },
-        { title: "Front-End / Web Developer", text: "Builds the user-facing side of websites and applications: layout, styling, interactivity, and user experience. Back-end versions handle servers and APIs. Common tools include HTML, CSS, JavaScript, and React." },
-        { title: "Application Developer", text: "Customizes or builds software applications supporting specific business operations — often internal tools rather than customer-facing products." }
-      ]
-    },
-    {
-      id: "qa-engineer",
-      code: "QA-02",
-      name: "QA / Test Engineer",
-      industry: "Quality Assurance",
-      salary: "Starting Range: $70,000 – $92,000",
-      blurb: "Writes and runs automated test suites to catch bugs before software ships, documents defects, and works with developers to verify fixes.",
-      details: [
-        { title: "QA / Test Engineer Summary", text: "Focuses on software reliability and quality rather than writing new features. Utilizes automation frameworks (Selenium, pytest, Cypress) to verify system specs and prevent defects in production." }
-      ]
-    },
-    {
-      id: "programmer-analyst",
-      code: "PA-03",
-      name: "Programmer / Analyst",
-      industry: "Enterprise Systems",
-      salary: "Starting Range: $72,000 – $95,000",
-      blurb: "A hybrid role that writes code (often in SQL or scripting languages) while analyzing business data and system processes.",
-      details: [
-        { title: "Programmer / Analyst Summary", text: "Common in mid-size companies where developer and analyst duties overlap. Focuses on maintaining enterprise software systems while optimizing underlying database queries and business logic." }
-      ]
-    },
-    {
-      id: "sec-dev",
-      code: "SEC-04",
-      name: "Security Software Developer",
-      industry: "Cybersecurity & Dev",
-      salary: "Starting Range: $80,000 – $110,000",
-      blurb: "Writes software specifically for security products — such as building tools that scan for vulnerabilities or enforce access control policies.",
-      details: [
-        { title: "Security Developer Summary", text: "Straddles development and cybersecurity. Day-to-day focus is writing code for security tools, encryption algorithms, and authorization features rather than auditing existing systems." }
-      ]
-    },
-    {
-      id: "bus-systems-analyst",
-      code: "BA-05",
-      name: "Business / Systems Analyst",
-      industry: "Analytics & Strategy",
-      salary: "Starting Range: $70,000 – $90,000",
-      blurb: "Acts as the bridge between business needs and technical teams. Interviews stakeholders, maps workflows, and designs software system specifications.",
-      details: [
-        { title: "Business Analyst Summary", text: "Identifies inefficiencies, translates technical specs into non-technical requirements, and guides systems implementation. Emphasizes change management and end-user training." }
-      ]
-    },
-    {
-      id: "it-fin-analyst",
-      code: "FIN-06",
-      name: "IT / Financial Analyst",
-      industry: "Corporate Finance & IT",
-      salary: "Starting Range: $73,000 – $93,000",
-      blurb: "Applies technical analytical skills to auditing IT operations, financial software systems, tracking metrics, and recommending optimizations.",
-      details: [
-        { title: "IT / Financial Analyst Summary", text: "Focuses on the financial health of technology initiatives, calculating ROI/TCO for IT projects, and auditing process compliance across domain operations." }
-      ]
-    },
-    {
-      id: "bus-trans-analyst",
-      code: "BTA-07",
-      name: "Business Transformation Analyst",
-      industry: "Change Management",
-      salary: "Starting Range: $75,000 – $98,000",
-      blurb: "Focuses on large-scale strategic initiatives: helping restructure company processes, departments, or enterprise tech suites.",
-      details: [
-        { title: "Business Transformation Summary", text: "Strategic and advisory-focused role. Helps companies navigate digital shifts, implement new platforms, and manage organizational change across departments." }
-      ]
-    },
-    {
-      id: "data-analyst-sci",
-      code: "DATA-08",
-      name: "Data Analyst / Scientist",
-      industry: "Data Science & BI",
-      salary: "Starting Range: $72,000 – $115,000",
-      blurb: "Collects, cleans, and analyzes data to answer key business questions using SQL, Python, Excel, Power BI, and statistical models.",
-      details: [
-        { title: "Data Analyst", text: "Collects, cleans, and analyzes data to answer specific questions. Relies on SQL, Excel, and visualization tools (Tableau, Power BI)." },
-        { title: "Data Engineer", text: "Builds and maintains pipelines and data warehouse infrastructure that move and store raw corporate data." },
-        { title: "Data Scientist", text: "Uses advanced statistics, machine learning, and Python/R to construct predictive models that forecast business trends." },
-        { title: "BI Analyst / Developer", text: "Turns data into executive dashboards and interactive reports, serving as the bridge between raw data and business decision-makers." }
-      ]
-    },
-    {
-      id: "cyber-analyst",
-      code: "CYBER-09",
-      name: "Cybersecurity Analyst",
-      industry: "Information Security",
-      salary: "Starting Range: $75,000 – $100,000",
-      blurb: "Monitors networks for threats, investigates suspicious security activity, enforces compliance standards, and audits system risks.",
-      details: [
-        { title: "Security Analyst / Engineer", text: "Monitors networks for threats, investigates suspicious activity, and manages firewalls and endpoint security tools." },
-        { title: "Cybersecurity Consultant", text: "Advises client organizations on risk assessments, security posture, and defense strategies." },
-        { title: "IT Risk / Compliance Analyst & Auditor", text: "Focuses on compliance regulations (SOX, HIPAA, PCI) and auditing technology systems for policy vulnerabilities." }
-      ]
-    },
-    {
-      id: "it-pm",
-      code: "PM-10",
-      name: "IT Project Manager",
-      industry: "Management",
-      salary: "Starting Range: $78,000 – $102,000",
-      blurb: "Plans, schedules, and tracks technical projects — coordinating software teams, budgets, and delivery timelines.",
-      details: [
-        { title: "Project / Program Manager", text: "Coordinates people, project budgets, and timelines to hit software delivery goals using Agile or Waterfall frameworks." },
-        { title: "Development / Technical Manager", text: "Blends team leadership with technical background to oversee software engineering teams and architectural execution." }
-      ]
-    },
-    {
-      id: "ux-pm",
-      code: "UX-11",
-      name: "UX Designer / Product Manager",
-      industry: "Product & Design",
-      salary: "Starting Range: $72,000 – $98,000",
-      blurb: "Owns the strategy, roadmap, or user experience of a product: deciding what gets built based on market research and design usability.",
-      details: [
-        { title: "Product Manager", text: "Defines product roadmaps, features, and strategy by aligning engineering feasibility with customer needs and business goals." },
-        { title: "UX / Web Designer", text: "Designs intuitiveness, user flows, wireframes, and visual interface interactions prior to software development." }
-      ]
-    },
-    {
-      id: "erp-consultant",
-      code: "ERP-12",
-      name: "ERP / Systems Consultant",
-      industry: "Consulting & CRM",
-      salary: "Starting Range: $75,000 – $95,000",
-      blurb: "Configures and customizes major enterprise suites (Salesforce, SAP) to fit client business operations and integrations.",
-      details: [
-        { title: "Salesforce / CRM Consultant", text: "Configures workflows, custom fields, and integrations on cloud CRM platforms to support business sales and operations." },
-        { title: "Implementation / Technology Consultant", text: "Leads client software setups, data migration, platform testing, and system training during enterprise deployments." }
-      ]
-    }
-  ];
-
   const list = document.getElementById('paths-list');
 
-  CAREER_DATA.forEach((career) => {
+  CAREERS.forEach((career) => {
     const row = document.createElement('button');
     row.className = 'path-row';
     row.type = 'button';
@@ -298,23 +100,28 @@
     detail.id = `detail-${career.id}`;
     detail.setAttribute('role', 'region');
     detail.setAttribute('aria-labelledby', `row-${career.id}`);
-
-    const subrolesHTML = career.details.map(d => `
-      <details class="subrole-accordion">
-        <summary>${d.title}</summary>
-        <div class="subrole-content">${d.text}</div>
-      </details>
-    `).join('');
-
     detail.innerHTML = `
-      <p style="max-width:70ch;margin-top:0;">${career.blurb}</p>
+      <p style="max-width:60ch;margin-top:0;">${career.blurb}</p>
       <span class="salary-line">${career.salary}</span>
-      
-      <div style="margin-top: 1rem;">
-        ${subrolesHTML}
+      <div class="path-detail-grid">
+        <div>
+          <h4>Day to day</h4>
+          <ul>${career.dayToDay.map(x => `<li>${x}</li>`).join('')}</ul>
+        </div>
+        <div>
+          <h4>Skills &amp; tools</h4>
+          <ul>${career.skills.map(x => `<li>${x}</li>`).join('')}</ul>
+        </div>
+        <div>
+          <h4>What entry-level candidates are expected to know</h4>
+          <ul>${career.expectations.map(x => `<li>${x}</li>`).join('')}</ul>
+        </div>
+        <div>
+          <h4>What makes a strong candidate</h4>
+          <ul>${career.strongCandidate.map(x => `<li>${x}</li>`).join('')}</ul>
+        </div>
       </div>
-
-      <div class="detail-actions" style="margin-top: 1.5rem;">
+      <div class="detail-actions">
         <a class="btn royal" href="interview.html?career=${career.id}">Prep for this interview</a>
         <a class="btn secondary" href="compatibility.html">Check my fit</a>
       </div>
@@ -329,23 +136,11 @@
     list.appendChild(detail);
   });
 
-  // Auto-expand target role based on query parameter (?career=...) or hash (#track=...)
-  window.addEventListener('load', () => {
-    const params = new URLSearchParams(window.location.search);
-    const paramCareer = params.get('career');
-    const hashMatch = window.location.hash.match(/track=([\w-]+)/);
-    const targetId = paramCareer || (hashMatch ? hashMatch[1] : null);
-
-    if (targetId) {
-      const targetRow = document.getElementById(`row-${targetId}`);
-      if (targetRow) {
-        if (targetRow.getAttribute('aria-expanded') === 'false') {
-          targetRow.click();
-        }
-        targetRow.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    }
-  });
+  const hashMatch = location.hash.match(/track=([\w-]+)/);
+  if (hashMatch) {
+    const targetRow = document.getElementById(`row-${hashMatch[1]}`);
+    if (targetRow) targetRow.click();
+  }
 </script>
 </body>
 </html>
