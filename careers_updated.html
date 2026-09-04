@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Career Paths — IS Career Launchpad</title>
+<meta name="description" content="Explore IS career paths — what each role does day to day, what skills it takes, and what it pays to start.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header-top">
+  <div class="top-inner">
+    <a class="brand" href="index.html">
+      <span class="brand-mark">BYU</span>
+      <span class="brand-divider"></span>
+      <span class="brand-name">IS Career Launchpad</span>
+    </a>
+    <a class="top-cta" href="compatibility.html">Take the Compatibility Test</a>
+  </div>
+</header>
+<nav class="site-header-nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="index.html">Home</a>
+    <a href="careers.html" aria-current="page">Career Paths</a>
+    <a href="compatibility.html">Compatibility Test</a>
+    <a href="interview.html">Interview Prep</a>
+  </div>
+</nav>
+
+<main id="main">
+  <div class="page-hero">
+    <p class="eyebrow">SIX TRACKS, ONE DEGREE</p>
+    <h1>Where an IS degree actually leads.</h1>
+    <p class="lede">Six real career paths for Information Systems graduates. Open one to see the day-to-day work, the skills it actually requires, and what it takes to stand out as an entry-level candidate.</p>
+  </div>
+
+  <section aria-labelledby="list-title">
+    <h2 id="list-title" class="section-title">Career paths</h2>
+    <p class="section-sub">Click a row to expand it.</p>
+    <div class="paths-list" id="paths-list"></div>
+  </section>
+
+  <section aria-labelledby="next-title">
+    <h2 id="next-title" class="section-title">Not sure which one fits?</h2>
+    <p class="section-sub">Take the two-minute compatibility test, or head straight to interview prep for a track you already like.</p>
+    <div class="detail-actions">
+      <a class="btn royal" href="compatibility.html">Take the compatibility test</a>
+      <a class="btn secondary" href="interview.html">Go to interview prep</a>
+    </div>
+  </section>
+
+  <section aria-labelledby="about-title">
+    <h2 id="about-title" class="section-title">About this project</h2>
+    <p class="section-sub">Built for the BYU IS Junior Core Case Competition to help incoming IS students discover career paths and prepare for internship interviews before the September STEM fair.</p>
+    <div class="notice">
+      Salary figures are prototype estimates from general entry-level industry data. Before relying on them, cross-check against current Handshake and LinkedIn postings for BYU IS placements.
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <h4>Contact</h4>
+      <p>BYU Information Systems</p>
+      <p>IS Career Launchpad — Junior Core Case Competition</p>
+    </div>
+    <div>
+      <h4>Quick Links</h4>
+      <a href="index.html">Home</a>
+      <a href="careers.html">Career Paths</a>
+      <a href="compatibility.html">Compatibility Test</a>
+      <a href="interview.html">Interview Prep</a>
+    </div>
+  </div>
+  <div class="footer-bottom">Student prototype built for the BYU IS Junior Core Case Competition — not an official BYU site.</div>
+</footer>
+
+<script src="data.js"></script>
+<script>
+  const list = document.getElementById('paths-list');
+
+  CAREERS.forEach((career) => {
+    const row = document.createElement('button');
+    row.className = 'path-row';
+    row.type = 'button';
+    row.setAttribute('aria-expanded', 'false');
+    row.setAttribute('aria-controls', `detail-${career.id}`);
+    row.id = `row-${career.id}`;
+    row.innerHTML = `
+      <span class="track-id mono">${career.code}</span>
+      <span class="name">${career.name}<span>${career.industry}</span></span>
+      <span class="caret">&#9656;</span>
+    `;
+
+    const detail = document.createElement('div');
+    detail.className = 'path-detail';
+    detail.id = `detail-${career.id}`;
+    detail.setAttribute('role', 'region');
+    detail.setAttribute('aria-labelledby', `row-${career.id}`);
+    detail.innerHTML = `
+      <p style="max-width:60ch;margin-top:0;">${career.blurb}</p>
+      <span class="salary-line">${career.salary}</span>
+      <div class="path-detail-grid">
+        <div>
+          <h4>Day to day</h4>
+          <ul>${career.dayToDay.map(x => `<li>${x}</li>`).join('')}</ul>
+        </div>
+        <div>
+          <h4>Skills &amp; tools</h4>
+          <ul>${career.skills.map(x => `<li>${x}</li>`).join('')}</ul>
+        </div>
+        <div>
+          <h4>What entry-level candidates are expected to know</h4>
+          <ul>${career.expectations.map(x => `<li>${x}</li>`).join('')}</ul>
+        </div>
+        <div>
+          <h4>What makes a strong candidate</h4>
+          <ul>${career.strongCandidate.map(x => `<li>${x}</li>`).join('')}</ul>
+        </div>
+      </div>
+      <div class="detail-actions">
+        <a class="btn royal" href="interview.html?career=${career.id}">Prep for this interview</a>
+        <a class="btn secondary" href="compatibility.html">Check my fit</a>
+      </div>
+    `;
+
+    row.addEventListener('click', () => {
+      const isOpen = detail.classList.toggle('open');
+      row.setAttribute('aria-expanded', String(isOpen));
+    });
+
+    list.appendChild(row);
+    list.appendChild(detail);
+  });
+
+  const hashMatch = location.hash.match(/track=([\w-]+)/);
+  if (hashMatch) {
+    const targetRow = document.getElementById(`row-${hashMatch[1]}`);
+    if (targetRow) targetRow.click();
+  }
+</script>
+</body>
+</html>
