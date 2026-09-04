@@ -78,8 +78,107 @@
   <div class="footer-bottom">Student prototype built for the BYU IS Junior Core Case Competition — not an official BYU site.</div>
 </footer>
 
-<script src="data.js"></script>
 <script>
+  // Inline CAREERS data array
+  const CAREERS = [
+    {
+      id: "software-engineer",
+      code: "DEV-01",
+      name: "Software Engineer / Application Developer",
+      industry: "Software Engineering",
+      salary: "Starting Range: $75,000 – $105,000",
+      blurb: "Designs, writes, tests, and maintains code that powers web applications, internal tools, and software solutions.",
+      dayToDay: [
+        "Writing clean, maintainable code in languages like C#, Java, Python, or TypeScript",
+        "Collaborating with product managers and designers to define technical requirements",
+        "Debugging software issues and testing application performance"
+      ],
+      skills: ["C# / Java / Python", "JavaScript / React", "SQL & Database Design", "Git & Version Control"],
+      expectations: ["Strong foundational knowledge of OOP", "Ability to design relational database schemas", "Familiarity with basic web frameworks"],
+      strongCandidate: ["Personal coding projects or open-source contributions", "Prior software dev internship experience"]
+    },
+    {
+      id: "data-analyst",
+      code: "DATA-02",
+      name: "Data Analyst / BI Developer",
+      industry: "Analytics & Data Science",
+      salary: "Starting Range: $72,000 – $115,000",
+      blurb: "Transforms raw data into actionable business insights through SQL queries, visualization dashboards, and statistical models.",
+      dayToDay: [
+        "Querying enterprise databases to answer critical business questions",
+        "Building interactive executive dashboards in Power BI or Tableau",
+        "Cleaning and transforming complex datasets for operational reporting"
+      ],
+      skills: ["Advanced SQL", "Power BI / Tableau", "Python / R", "Excel Data Modeling"],
+      expectations: ["Fluency writing complex SQL joins and aggregations", "Ability to summarize findings visually"],
+      strongCandidate: ["Experience working with real-world, messy datasets", "Demonstrated business acumen alongside analytical skills"]
+    },
+    {
+      id: "systems-analyst",
+      code: "BA-03",
+      name: "Business / Systems Analyst",
+      industry: "Enterprise Technology & Strategy",
+      salary: "Starting Range: $70,000 – $90,000",
+      blurb: "Bridges the gap between business stakeholders and technical execution teams by gathering specs and mapping processes.",
+      dayToDay: [
+        "Interviewing business leads to gather and document functional requirements",
+        "Mapping current-state vs. future-state technical workflows",
+        "Assisting project managers with sprint planning and user stories"
+      ],
+      skills: ["Process Mapping (BPMN)", "Requirements Gathering", "SQL Basics", "Agile / Scrum"],
+      expectations: ["Clear written and verbal communication", "Understanding of software development life cycles (SDLC)"],
+      strongCandidate: ["Experience leading student organization projects or case competitions"]
+    },
+    {
+      id: "cybersecurity",
+      code: "CYBER-04",
+      name: "Cybersecurity / Risk Analyst",
+      industry: "Information Security",
+      salary: "Starting Range: $75,000 – $100,000",
+      blurb: "Monitors network safety, conducts risk assessments, and enforces security compliance standards to protect systems.",
+      dayToDay: [
+        "Monitoring security logs and investigating potential vulnerabilities",
+        "Auditing IT systems against security compliance frameworks (SOX, HIPAA)",
+        "Assisting with security awareness training and incident response plans"
+      ],
+      skills: ["Network Security Fundamentals", "IT Audit & Risk Assessment", "SIEM Tools", "Scripting (Python/Bash)"],
+      expectations: ["Knowledge of core networking principles and threat landscapes"],
+      strongCandidate: ["Security certifications (CompTIA Security+, ISACA) or CTF competition experience"]
+    },
+    {
+      id: "it-project-manager",
+      code: "PM-05",
+      name: "IT Project / Product Manager",
+      industry: "Technical Management",
+      salary: "Starting Range: $78,000 – $102,000",
+      blurb: "Oversees software project execution, managing scope, timelines, resources, and team communication.",
+      dayToDay: [
+        "Leading daily stand-ups and sprint planning meetings with engineers",
+        "Tracking project milestones and clearing blockers for the team",
+        "Communicating status updates to executive leadership"
+      ],
+      skills: ["Agile / Scrum Frameworks", "JIRA / Azure DevOps", "Scope Management", "Stakeholder Communication"],
+      expectations: ["Strong organizational and leadership capabilities", "General understanding of software architecture"],
+      strongCandidate: ["CAPM/PSM certifications or experience managing technical team deliverables"]
+    },
+    {
+      id: "tech-consultant",
+      code: "CONSULT-06",
+      name: "Technology / ERP Consultant",
+      industry: "Consulting & Cloud Platforms",
+      salary: "Starting Range: $75,000 – $98,000",
+      blurb: "Advises clients on adopting enterprise systems like Salesforce, SAP, or ServiceNow to optimize business operations.",
+      dayToDay: [
+        "Configuring enterprise software solutions to fit specific client requirements",
+        "Facilitating client discovery workshops and training end users",
+        "Migrating legacy client data into cloud platform solutions"
+      ],
+      skills: ["Salesforce / Enterprise Systems", "Client Management", "System Configuration", "Problem Solving"],
+      expectations: ["Comfortable speaking with external clients and adapting to new technology platforms quickly"],
+      strongCandidate: ["Platform certifications (e.g., Salesforce Certified Administrator)"]
+    }
+  ];
+
   const list = document.getElementById('paths-list');
 
   CAREERS.forEach((career) => {
