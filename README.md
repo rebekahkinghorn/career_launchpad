@@ -1,6 +1,6 @@
 # IS Career Launchpad
 
-A static, no-build prototype for the BYU IS Junior Core Case Competition. Helps incoming
+This is a static, no-build prototype for the BYU IS Junior Core Case Competition. The tool helps incoming
 IS students explore career paths and practice interview questions for them.
 
 ## Pages
@@ -15,6 +15,7 @@ IS students explore career paths and practice interview questions for them.
   track's interview prep.
 - `interview.html` — Interview Prep: pick a track and work through behavioral and
   technical questions, with a reveal for a strong model answer and a coaching tip on each.
+- `contact.html` — Contact: view information about IS careers at https://iscareers.byu.edu/.
 
 ## Shared files
 - `data.js` — all career, quiz, and interview-question content in one place. Edit this
